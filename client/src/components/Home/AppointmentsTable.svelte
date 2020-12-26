@@ -1,5 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import AppointmentsStore, {
+    removeAppointment,
+  } from "../../stores/AppointmentsStore";
   import { Table, Button } from "sveltestrap";
   import type { IAppointment } from "../../interfaces/IAppointment";
   import EditAppointmentModal from "./EditAppointmentModal.svelte";
@@ -30,10 +33,7 @@
   };
 
   const handleRemove = async (id: number): Promise<void> => {
-    await fetch(`http://localhost:3000/appointments/${id}`, {
-      method: "DELETE",
-    });
-    appts = appts.filter((appt: IAppointment) => appt.id !== id);
+    removeAppointment(id);
   };
 </script>
 
@@ -48,7 +48,7 @@
     </tr>
   </thead>
   <tbody>
-    {#each appts as { id, date, contactName, reason }, i}
+    {#each $AppointmentsStore as { id, date, contactName, reason }, i}
       <tr>
         <th scope="row">{id}</th>
         <td>{date}</td>

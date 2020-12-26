@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { afterUpdate, createEventDispatcher } from "svelte";
+  import { afterUpdate } from "svelte";
   import {
     Button,
     Form,
@@ -11,8 +11,7 @@
     ModalHeader,
   } from "sveltestrap";
   import type { IAppointment } from "../../interfaces/IAppointment";
-
-  const dispatch = createEventDispatcher();
+  import { updateAppointment } from "../../stores/AppointmentsStore";
 
   export let selectedAppt: IAppointment;
   export let open: boolean;
@@ -22,10 +21,10 @@
     if (selectedAppt) {
       console.log(typeof date);
 
+      id = selectedAppt.id;
       date = selectedAppt.date;
       contactName = selectedAppt.contactName;
       reason = selectedAppt.reason;
-      id = selectedAppt.id;
     }
   });
 
@@ -38,22 +37,13 @@
     event.preventDefault();
 
     let updatedAppt = {
+      id,
       date,
       contactName,
       reason,
     };
 
-    await fetch(`http://localhost:3000/appointments/${id}`, {
-      method: "PATCH",
-      body: JSON.stringify(updatedAppt),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    dispatch("update-appts", {
-      updatedAppt,
-    });
+    updateAppointment(updatedAppt);
 
     toggle();
   }

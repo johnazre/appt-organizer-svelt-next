@@ -3,8 +3,14 @@
 	import TopNav from "./components/layout/TopNav.svelte";
 	import HomeView from "./routes/HomeView.svelte";
 	import AddAppointmentView from "./routes/AddAppointmentView.svelte";
+	import { onMount } from "svelte";
+	import { populateAppointments } from "./stores/AppointmentsStore";
 
 	export let url = "";
+
+	onMount(() => {
+		populateAppointments();
+	});
 </script>
 
 <Router {url}>

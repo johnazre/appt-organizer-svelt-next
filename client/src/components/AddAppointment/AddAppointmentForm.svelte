@@ -1,6 +1,7 @@
 <script lang="ts">
   import { Button, Form, FormGroup, Input, Label } from "sveltestrap";
   import { navigate } from "svelte-routing";
+  import { addAppointment } from "../../stores/AppointmentsStore";
 
   let date = "";
   let contactName = "";
@@ -24,7 +25,7 @@
       },
     })
       .then((res) => res.json())
-      .then((response) => console.log("response", response))
+      .then((response) => addAppointment(response))
       .then(() => navigate("/"));
   }
 </script>

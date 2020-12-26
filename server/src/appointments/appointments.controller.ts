@@ -25,7 +25,7 @@ export class AppointmentsController {
   }
 
   @Post()
-  createOne(@Body() createAppointmentDto: CreateAppointmentDto) {
+  createOne(@Body() createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
     return this.apptsService.createOne(createAppointmentDto);
   }
 
