@@ -11,7 +11,7 @@
 <Container>
   <Row>
     <Col>
-      <Button on:click={handleClick}>Add Appointment</Button>
+      <Button class="mt-3" on:click={handleClick}>Add Appointment</Button>
     </Col>
   </Row>
   <Row>

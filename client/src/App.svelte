@@ -1,15 +1,22 @@
 <script lang="ts">
-	import { Router, Route } from "svelte-routing";
+	import { Router, Route, navigate } from "svelte-routing";
 	import TopNav from "./components/layout/TopNav.svelte";
 	import HomeView from "./routes/HomeView.svelte";
 	import AddAppointmentView from "./routes/AddAppointmentView.svelte";
-	import { onMount } from "svelte";
+	import { afterUpdate, onMount } from "svelte";
 	import { populateAppointments } from "./stores/AppointmentsStore";
+	import LoginView from "./routes/LoginView.svelte";
+	import Redirect from "./components/util/Redirect.svelte";
+	import { AuthStore } from "./stores/AuthStore";
 
 	export let url = "";
 
 	onMount(() => {
 		populateAppointments();
+	});
+
+	afterUpdate(() => {
+		console.log("auth store", $AuthStore);
 	});
 </script>
 
@@ -17,7 +24,13 @@
 	<TopNav />
 	<div>
 		<Route path="/">
+			<Redirect to="/login" />
+		</Route>
+		<Route path="/home">
 			<HomeView />
+		</Route>
+		<Route path="/login">
+			<LoginView />
 		</Route>
 		<Route path="/add-appointment">
 			<AddAppointmentView />
