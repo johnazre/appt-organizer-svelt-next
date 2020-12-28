@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Appointment } from './appointments/appointment.entity';
 import { AppointmentModule } from './appointments/appointments.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { AppointmentModule } from './appointments/appointments.module';
       dropSchema: true,
     }),
     AppointmentModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
