@@ -25,7 +25,9 @@ export class AppointmentsController {
   }
 
   @Post()
-  createOne(@Body() createAppointmentDto: CreateAppointmentDto): Promise<Appointment> {
+  createOne(
+    @Body() createAppointmentDto: CreateAppointmentDto,
+  ): Promise<Appointment> {
     return this.apptsService.createOne(createAppointmentDto);
   }
 
@@ -34,7 +36,6 @@ export class AppointmentsController {
     @Param('id') id: string,
     @Body() createAppointmentDto: CreateAppointmentDto,
   ) {
-    console.log('heard in the controller', createAppointmentDto);
     return this.apptsService.updateOne(id, createAppointmentDto);
   }
 

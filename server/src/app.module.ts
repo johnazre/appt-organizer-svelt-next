@@ -4,26 +4,11 @@ import { Connection } from 'typeorm';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { Appointment } from './appointments/appointment.entity';
 import { AppointmentModule } from './appointments/appointments.module';
 import { UsersModule } from './users/users.module';
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: '',
-      password: '',
-      database: 'appts-dev',
-      entities: [Appointment],
-      synchronize: true,
-      dropSchema: true,
-    }),
-    AppointmentModule,
-    UsersModule,
-  ],
+  imports: [TypeOrmModule.forRoot(), AppointmentModule, UsersModule],
   controllers: [AppController],
   providers: [AppService],
 })
