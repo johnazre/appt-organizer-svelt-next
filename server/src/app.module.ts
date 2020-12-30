@@ -6,6 +6,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Appointment } from './appointments/appointment.entity';
 import { AppointmentModule } from './appointments/appointments.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -13,14 +14,15 @@ import { AppointmentModule } from './appointments/appointments.module';
       type: 'postgres',
       host: 'localhost',
       port: 5432,
-      username: 'postgres',
-      password: 'root',
+      username: '',
+      password: '',
       database: 'appts-dev',
       entities: [Appointment],
       synchronize: true,
       dropSchema: true,
     }),
     AppointmentModule,
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],
