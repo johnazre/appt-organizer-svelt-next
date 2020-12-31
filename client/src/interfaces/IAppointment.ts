@@ -1,6 +1,10 @@
+import type { IUser } from './IUser'
+
 export interface IAppointment {
   id?: number
   date: string
-  contactName: string
   reason: string
+  withUser?: IUser
+  createdAt?: Date
+  updatedAt?: Date
 }

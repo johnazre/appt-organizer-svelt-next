@@ -40,7 +40,6 @@
 <Table>
   <thead>
     <tr>
-      <th>ID</th>
       <th>Date/Time</th>
       <th>Contact Name</th>
       <th>Reason for meeting</th>
@@ -48,11 +47,10 @@
     </tr>
   </thead>
   <tbody>
-    {#each $AppointmentsStore as { id, date, contactName, reason }, i}
+    {#each $AppointmentsStore as { id, date, reason, withUser }, i}
       <tr>
-        <th scope="row">{id}</th>
         <td>{date}</td>
-        <td>{contactName}</td>
+        <td>{withUser.fullName}</td>
         <td>{reason}</td>
         <td>
           <Button color="warning" on:click={() => setSelectedAppt(id)}>
@@ -66,8 +64,10 @@
     {/each}
   </tbody>
 </Table>
-<EditAppointmentModal
-  {open}
-  {toggle}
-  {selectedAppt}
-  on:update-appts={updateAppts} />
+{#if selectedAppt}
+  <EditAppointmentModal
+    {open}
+    {toggle}
+    {selectedAppt}
+    on:update-appts={updateAppts} />
+{/if}

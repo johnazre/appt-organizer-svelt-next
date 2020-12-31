@@ -8,11 +8,13 @@
 	import LoginView from "./routes/LoginView.svelte";
 	import Redirect from "./components/util/Redirect.svelte";
 	import { AuthStore } from "./stores/AuthStore";
+	import { populateUsers } from "./stores/UsersStore";
 
 	export let url = "";
 
 	onMount(() => {
 		populateAppointments();
+		populateUsers();
 	});
 
 	afterUpdate(() => {

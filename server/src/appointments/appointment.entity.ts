@@ -13,7 +13,7 @@ export class Appointment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.appointments)
+  @ManyToOne(() => User, (user) => user.appointments, { eager: true })
   withUser: User;
 
   @Column()
