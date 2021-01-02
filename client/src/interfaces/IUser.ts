@@ -8,6 +8,6 @@ export interface IUser {
   email: string
   password?: string
   phone: string
-  createdAt: Date
-  updatedAt: Date
+  createdAt?: Date
+  updatedAt?: Date
 }

@@ -28,7 +28,8 @@ export class AppointmentsService {
   ): Promise<Appointment> {
     const newAppt = this.apptRepository.create(createAppointmentDto);
     newAppt.withUser = await this.userRepository.findOne(
-      createAppointmentDto.userId,
+      //@ts-ignore
+      createAppointmentDto.withUser,
     );
     return this.apptRepository.save(newAppt);
   }

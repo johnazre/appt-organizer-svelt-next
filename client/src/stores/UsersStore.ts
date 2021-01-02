@@ -1,5 +1,6 @@
 import { writable, Writable } from 'svelte/store'
 import type { IUser } from '../interfaces/IUser'
+import { AuthStore } from './AuthStore'
 
 const UsersStore: Writable<IUser[]> = writable([] as IUser[])
 
@@ -10,7 +11,7 @@ export const populateUsers = async () => {
   UsersStore.update(() => users)
 }
 
-export const addAppointment = async (newUser: IUser) => {
+export const userSignup = async (newUser: IUser) => {
   await fetch(`http://localhost:3000/users`, {
     method: 'POST',
     body: JSON.stringify(newUser),
@@ -23,7 +24,7 @@ export const addAppointment = async (newUser: IUser) => {
   })
 }
 
-export const updateAppointment = async (updatedUser: IUser) => {
+export const updateUser = async (updatedUser: IUser) => {
   await fetch(`http://localhost:3000/users/${updatedUser.id}`, {
     method: 'PATCH',
     body: JSON.stringify(updatedUser),

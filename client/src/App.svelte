@@ -9,6 +9,7 @@
 	import Redirect from "./components/util/Redirect.svelte";
 	import { AuthStore } from "./stores/AuthStore";
 	import { populateUsers } from "./stores/UsersStore";
+	import SignupView from "./routes/SignupView.svelte";
 
 	export let url = "";
 
@@ -33,6 +34,9 @@
 		</Route>
 		<Route path="/login">
 			<LoginView />
+		</Route>
+		<Route path="/signup">
+			<SignupView />
 		</Route>
 		<Route path="/add-appointment">
 			<AddAppointmentView />

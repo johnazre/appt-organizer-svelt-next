@@ -18,18 +18,9 @@
       reason,
     };
 
-    // fetch(`http://localhost:3000/appointments`, {
-    //   method: "POST",
-    //   body: JSON.stringify(newAppt),
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    // })
-    //   .then((res) => res.json())
-    //   .then((response) => addAppointment(response))
-    //   .then(() => navigate("/"));
+    console.log("newappt", newAppt);
 
-    addAppointment(newAppt).then(() => navigate("/"));
+    addAppointment(newAppt).then(() => navigate("/home"));
   }
 </script>
 
