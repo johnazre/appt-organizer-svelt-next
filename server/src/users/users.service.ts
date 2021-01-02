@@ -24,6 +24,10 @@ export class UsersService {
     return this.userRepository.save(createUserDto);
   }
 
+  verifyEmail(email: string): Promise<User> {
+    return this.userRepository.findOne({ email });
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto): Promise<boolean> {
     try {
       await this.userRepository.update(id, updateUserDto);

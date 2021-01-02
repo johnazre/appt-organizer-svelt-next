@@ -10,12 +10,17 @@
   } from "sveltestrap";
   import { Link } from "svelte-routing";
   import { AuthStore } from "../../stores/AuthStore";
+  import { afterUpdate } from "svelte";
 
   let isOpen = false;
 
   function handleUpdate(event) {
     isOpen = event.detail.isOpen;
   }
+
+  afterUpdate(() => {
+    console.log("auth store in topnave", $AuthStore);
+  });
 </script>
 
 <Navbar color="primary" dark expand="md">
@@ -27,7 +32,14 @@
         {#if !$AuthStore.isAuthed}
           <NavLink tag={Link} to="/login">Login</NavLink>
         {:else}
-          <NavLink tag={Link} to="/login">Hello there!</NavLink>
+          {#await $AuthStore}
+            <p>...waiting</p>
+          {:then thestore}
+            <NavLink tag={Link} to="/login">
+              Hello there,
+              {thestore.activeUser.fullName}!
+            </NavLink>
+          {/await}
         {/if}
       </NavItem>
     </Nav>

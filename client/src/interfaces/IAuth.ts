@@ -1,3 +1,4 @@
 export interface IAuth {
-    isAuthed: boolean
+  isAuthed: boolean
+  activeUser: any
 }

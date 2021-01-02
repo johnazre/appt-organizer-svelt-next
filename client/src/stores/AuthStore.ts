@@ -6,8 +6,13 @@ export const AuthStore: Writable<IAuth> = writable({
   activeUser: {},
 })
 
-export const setIsAuthed = (isAuthed: boolean) => {
+export const setIsAuthed = async (isAuthed: boolean, email: string) => {
+  const response = await fetch(
+    `http://localhost:3000/users/verify?email=${email}`
+  )
+  const verifiedUser = await response.json()
+
   AuthStore.update((auth: IAuth) => {
-    return { ...auth, isAuthed }
+    return { ...auth, isAuthed, activeUser: verifiedUser }
   })
 }

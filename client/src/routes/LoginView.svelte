@@ -21,7 +21,7 @@
         if (!email || !password) {
             showError = true;
         } else {
-            setIsAuthed(true);
+            setIsAuthed(true, email);
             navigate("/home");
         }
     };
