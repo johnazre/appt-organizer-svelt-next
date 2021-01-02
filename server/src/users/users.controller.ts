@@ -33,6 +33,8 @@ export class UsersController {
 
   @Post('/verify')
   verifyEmail(@Query('email') email: string) {
+    console.log('-------- email in controller', email);
+
     return this.usersService.verifyEmail(email);
   }
 

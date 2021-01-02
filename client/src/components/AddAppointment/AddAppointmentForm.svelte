@@ -7,7 +7,7 @@
   let date = "";
   let reason = "";
   let time = "";
-  let withUser = "";
+  let withUser = "0";
 
   function handleSubmit(event: Event) {
     event.preventDefault();
@@ -36,6 +36,7 @@
   <FormGroup>
     <Label for="exampleSelect">With (Select whom you are meeting with)</Label>
     <Input type="select" name="select" id="exampleSelect" bind:value={withUser}>
+      <option value="0" disabled>-- Select a user from below --</option>
       {#each $UsersStore as user (user.id)}
         <option value={user.id}>{user.fullName}</option>
       {/each}

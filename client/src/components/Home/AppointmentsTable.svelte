@@ -7,13 +7,13 @@
   import type { IAppointment } from "../../interfaces/IAppointment";
   import EditAppointmentModal from "./EditAppointmentModal.svelte";
 
-  onMount(() => {
-    fetch("http://localhost:3000/appointments")
-      .then((res: Response) => res.json())
-      .then((appointments: IAppointment[]) => (appts = appointments));
-  });
+  // onMount(() => {
+  //   fetch("http://localhost:3000/appointments")
+  //     .then((res: Response) => res.json())
+  //     .then((appointments: IAppointment[]) => (appts = appointments));
+  // });
 
-  let appts: IAppointment[] = [];
+  let appts: IAppointment[] = $AppointmentsStore;
   let selectedAppt: IAppointment;
   let open: boolean = false;
 
@@ -47,21 +47,23 @@
     </tr>
   </thead>
   <tbody>
-    {#each $AppointmentsStore as { id, date, reason, withUser }, i}
-      <tr>
-        <td>{date}</td>
-        <td>{withUser.fullName}</td>
-        <td>{reason}</td>
-        <td>
-          <Button color="warning" on:click={() => setSelectedAppt(id)}>
-            Edit
-          </Button>
-          <Button color="danger" on:click={() => handleRemove(id)}>
-            Remove
-          </Button>
-        </td>
-      </tr>
-    {/each}
+    {#if $AppointmentsStore.length > 0}
+      {#each $AppointmentsStore as appt (appt.id)}
+        <tr>
+          <td>{appt.date}</td>
+          <td>{appt.withUser.fullName}</td>
+          <td>{appt.reason}</td>
+          <td>
+            <Button color="warning" on:click={() => setSelectedAppt(appt.id)}>
+              Edit
+            </Button>
+            <Button color="danger" on:click={() => handleRemove(appt.id)}>
+              Remove
+            </Button>
+          </td>
+        </tr>
+      {/each}
+    {/if}
   </tbody>
 </Table>
 {#if selectedAppt}

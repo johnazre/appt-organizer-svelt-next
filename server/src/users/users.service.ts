@@ -25,6 +25,8 @@ export class UsersService {
   }
 
   verifyEmail(email: string): Promise<User> {
+    console.log('email: ', email);
+
     return this.userRepository.findOne({ email });
   }
 

@@ -28,7 +28,7 @@
 <Container fluid>
   <Row>
     <Col class="mt-5" xs={{ size: 6, offset: 2 }}>
-      <h2 class="font-weight-bold">Log in below</h2>
+      <h2 class="font-weight-bold">Sign up below</h2>
     </Col>
   </Row>
   <Row>

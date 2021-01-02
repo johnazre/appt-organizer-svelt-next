@@ -26,6 +26,7 @@ export class AppointmentsService {
   async createOne(
     createAppointmentDto: CreateAppointmentDto,
   ): Promise<Appointment> {
+    console.log('cad', createAppointmentDto);
     const newAppt = this.apptRepository.create(createAppointmentDto);
     newAppt.withUser = await this.userRepository.findOne(
       //@ts-ignore

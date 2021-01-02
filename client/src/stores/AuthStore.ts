@@ -8,7 +8,10 @@ export const AuthStore: Writable<IAuth> = writable({
 
 export const setIsAuthed = async (isAuthed: boolean, email: string) => {
   const response = await fetch(
-    `http://localhost:3000/users/verify?email=${email}`
+    `http://localhost:3000/users/verify?email=${email}`,
+    {
+      method: 'POST',
+    }
   )
   const verifiedUser = await response.json()
 
