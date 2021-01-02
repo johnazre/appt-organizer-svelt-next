@@ -29,14 +29,15 @@
   });
 
   afterUpdate(() => {
-    console.log("runs");
-    console.log("selectedappt in afterUpdate", selectedAppt);
     let updatedAppt = {
       id,
       date,
       withUser,
       reason,
     };
+    date = date;
+    reason = reason;
+    withUser = withUser;
     console.log("updated appt in afterupdate", updatedAppt);
   });
 
@@ -67,7 +68,6 @@
 
 <Modal isOpen={open} {toggle} transitionOptions={{}}>
   <ModalHeader {toggle}>Modal title</ModalHeader>
-  {JSON.stringify({ msg: 'selectedappt in html', value: selectedAppt })}
   {#if selectedAppt.date}
     <ModalBody>
       <Form on:submit={handleSubmit}>

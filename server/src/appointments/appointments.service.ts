@@ -37,10 +37,23 @@ export class AppointmentsService {
     id: string,
     updateAppointmentDto: UpdateAppointmentDto,
   ): Promise<Appointment> {
-    const updatedAppt = await this.apptRepository.findOne(id);
+    console.log('uad', updateAppointmentDto);
+
+    let updatedAppt = await this.apptRepository.findOne(id);
+
     updatedAppt.withUser = await this.userRepository.findOne(
-      updateAppointmentDto.userId,
+      // @ts-ignore
+      updateAppointmentDto.withUser.id
+        ? // @ts-ignore
+          updateAppointmentDto.withUser.id
+        : // @ts-ignore
+          updateAppointmentDto.withUser,
     );
+    updatedAppt.reason = updateAppointmentDto.reason;
+    updatedAppt.date = updateAppointmentDto.date;
+    updatedAppt.updatedAt = new Date();
+
+    console.log('updatedAppt', updatedAppt);
     return this.apptRepository.save(updatedAppt);
   }
 

@@ -30,23 +30,31 @@ export const addAppointment = async (newAddAppt: IAddAppointment) => {
 }
 
 export const updateAppointment = async (newUpdatedAppt: IUpdateAppointment) => {
-  const response = await fetch(
-    `http://localhost:3000/appointments/${newUpdatedAppt.id}`,
-    {
-      method: 'PATCH',
-      body: JSON.stringify(newUpdatedAppt),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  )
-  const updatedAppt = await response.json()
-
-  AppointmentsStore.update((existingAppts: IAppointment[]): IAppointment[] => {
-    return existingAppts.map((appt) =>
-      appt.id !== updatedAppt.id ? appt : updatedAppt
+  console.log('heard in apptstore', newUpdatedAppt)
+  try {
+    const response = await fetch(
+      `http://localhost:3000/appointments/${newUpdatedAppt.id}`,
+      {
+        method: 'PATCH',
+        body: JSON.stringify(newUpdatedAppt),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      }
     )
-  })
+    const updatedAppt = await response.json()
+    console.log('updatedappt in apptstore', updatedAppt)
+
+    AppointmentsStore.update(
+      (existingAppts: IAppointment[]): IAppointment[] => {
+        return existingAppts.map((appt) =>
+          appt.id !== updatedAppt.id ? appt : updatedAppt
+        )
+      }
+    )
+  } catch (err) {
+    console.log('err', err)
+  }
 }
 
 export const removeAppointment = async (apptId: number) => {
